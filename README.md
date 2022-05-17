@@ -17,10 +17,12 @@ Huggingface 기반 KoBERT를 사용하여 텍스트 감정 분석을 진행하�
 
 ## Requirements
 
-- Python >= 3.6
-- PyTorch >= 1.8.1
-- transformers >= 4.8.2
-- sentencepiece >= 0.1.91
+- mxnet
+- gluonnlp
+- pandas
+- sentencepiece
+- transformers
+- torch
 
 ## How to install
 
