@@ -1,0 +1,6 @@
+mxnet
+gluonnlp 
+pandas 
+sentencepiece
+transformers
+torch
