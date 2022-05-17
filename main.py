@@ -26,7 +26,9 @@ if __name__ == '__main__':
     
     while True :
         sentence = input("하고싶은 말을 입력해주세요 : ")
+        temp=[]
         if sentence == '0' :
             break
-        model_predict.predict(sentence)
+        temp = model_predict.predict(sentence)
+        print(temp)
         print("\n")

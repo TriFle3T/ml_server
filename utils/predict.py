@@ -15,7 +15,7 @@ class BERTpredict():
                  
     def predict(self, predict_sentence):
 
-        emotion = {0:'두려움',1:'놀람',2:'분노',3:'슬픔',4:'중립',5:'행복',6:'혐오'}
+        emotion = {0:'행복',1:'분노',2:'혐오',3:'두려움',4:'중립',5:'슬픔',6:'놀람'}
         data = [predict_sentence, '0']
         dataset_another = [data]
 
@@ -36,11 +36,11 @@ class BERTpredict():
             test_eval=[]
             for i in out:
                 logits = i.detach().cpu().numpy()  
-                test_eval.append(emotion[np.argmax(logits)])
+                test_eval.append(np.argmax(logits))
             
             test_per=[]
             for i,logit in enumerate(logits):
                 test_per.append(round((1/(1+np.exp((-1)*logit)))*100))
                 print("{}:{}%".format(emotion[i],test_per[i]))
-            print(">> 입력하신 내용에서 " + test_eval[0] + "가(이) 느껴집니다.")
-            return test_per[5],test_per[2],test_per[6],test_per[0],test_per[3],test_eval[0]
+            print(">> 입력하신 내용에서 " + emotion[test_eval[0]] + "가(이) 느껴집니다.")
+            return test_per[0],test_per[1],test_per[2],test_per[3],test_per[4],test_per[5],test_per[6],test_eval[0]
