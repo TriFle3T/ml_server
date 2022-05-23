@@ -1,0 +1,22 @@
+FROM python:3.9.12
+
+COPY . /app
+
+WORKDIR /app 
+
+COPY ./model.pth /app/my_path/
+
+
+RUN pip install --upgrade pip
+RUN pip install -r requirement.txt
+
+# 환경변수 설정
+# ENV FLASK_APP flask
+ENV FLASK_APP "app"
+
+# entrypoint
+ENTRYPOINT ["flask"]
+
+# 컨테이너 실행 시 flask run --host 0.0.0.0 실행
+# --port 포트번호 => 포트번호 설정가능 기본포트 5000
+CMD ["run", "--host", "0.0.0.0"]

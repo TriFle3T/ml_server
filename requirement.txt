@@ -1,0 +1,9 @@
+mxnet
+gluonnlp 
+pandas 
+sentencepiece
+transformers
+torch
+flask
+flask_restx
+git+https://github.com/SKTBrain/KoBERT.git#egg=kobert_tokenizer&subdirectory=kobert_hf
