@@ -41,6 +41,5 @@ class BERTpredict():
             test_per=[]
             for i,logit in enumerate(logits):
                 test_per.append(round((1/(1+np.exp((-1)*logit)))*100))
-                print("{}:{}%".format(emotion[i],test_per[i]))
-            print(">> 입력하신 내용에서 " + emotion[test_eval[0]] + "가(이) 느껴집니다.")
-            return test_per[0],test_per[1],test_per[2],test_per[3],test_per[4],test_per[5],test_per[6],test_eval[0]
+
+            return int(test_per[0]),int(test_per[1]),int(test_per[2]),int(test_per[3]),int(test_per[4]),int(test_per[5]),int(test_per[6]),int(test_eval[0])
