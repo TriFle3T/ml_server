@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-
+import pandas as pd
 from utils.dataset import BERTDataset
 
 class BERTpredict():
@@ -33,13 +33,15 @@ class BERTpredict():
 
             out = self.model(token_ids, valid_length, segment_ids)
 
-            test_eval=[]
+            test_per=[]
             for i in out:
                 logits = i.detach().cpu().numpy()  
-                test_eval.append(np.argmax(logits))
+                for logit in logits:
+                  test_per.append(round((1/(1+np.exp((-1)*logit)))*100))
             
-            test_per=[]
-            for i,logit in enumerate(logits):
-                test_per.append(round((1/(1+np.exp((-1)*logit)))*100))
-
-            return int(test_per[0]),int(test_per[1]),int(test_per[2]),int(test_per[3]),int(test_per[4]),int(test_per[5]),int(test_per[6]),int(test_eval[0])
+            em = pd.Series(test_per,index = [0,1,2,3,4,5,6])
+            res = em.values.tolist()
+            res.append(int(em.sort_values().index[6]))
+            idx = 5 if res[7] == 6 else 6
+            res.append(int(em.sort_values().index[idx]))
+            return res
