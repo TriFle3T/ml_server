@@ -1,22 +1,16 @@
-FROM python:3.9.12
+FROM tiangolo/uwsgi-nginx:python3.9
 
-COPY . /app
 
 WORKDIR /app 
 
-COPY ./model.pth /app/my_path/
+COPY ./requirements.txt ./app/requirements.txt
 
+COPY ./model.pth /app/my_path/
+COPY ./utils /app/utils
 
 RUN pip install --upgrade pip
-RUN pip install -r requirement.txt
+RUN pip install -r ./app/requirements.txt
 
-# 환경변수 설정
-# ENV FLASK_APP flask
-ENV FLASK_APP "app"
+EXPOSE 5000
 
-# entrypoint
-ENTRYPOINT ["flask"]
-
-# 컨테이너 실행 시 flask run --host 0.0.0.0 실행
-# --port 포트번호 => 포트번호 설정가능 기본포트 5000
-CMD ["run", "--host", "0.0.0.0"]
+COPY ./app /app

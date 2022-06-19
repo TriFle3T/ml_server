@@ -19,7 +19,6 @@ app = Flask(__name__)
 def analyzeDiary():
     data = request.get_json(silent=True, cache=False, force=True)
     return analyze(data["content"][0])
-    
 
 
 def analyze(content):
@@ -35,7 +34,8 @@ def analyze(content):
         "neutral" : result[4],
         "sad" : result[5],
         "surprise" : result[6],
-        "index" : result[7]
+        "resultIndex" : result[7],
+        "quoteIndex" : result[8]
     }
 
 
@@ -53,3 +53,6 @@ model.load_state_dict(torch.load('./my_path/model.pth',map_location=device))
 model_predict = BERTpredict(model,tok,vocab,max_len,batch_size,device)
 
 application = app  
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0',debug=True,port = 80)
