@@ -1,0 +1,16 @@
+FROM tiangolo/uwsgi-nginx:python3.9
+
+
+WORKDIR /app 
+
+COPY ./requirements.txt ./app/requirements.txt
+
+COPY ./model.pth /app/my_path/
+COPY ./utils /app/utils
+
+RUN pip install --upgrade pip
+RUN pip install -r ./app/requirements.txt
+
+EXPOSE 5000
+
+COPY ./app /app
